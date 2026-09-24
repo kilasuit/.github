@@ -1,10 +1,8 @@
-# Contributing to PowerShellOrg Projects
+# Contributing to kilasuit Projects
 
-Welcome — and thank you for considering a contribution. PowerShellOrg maintains
-PowerShell open-source tools that depend on community involvement to survive.
-Every bug report, doc fix, and pull request matters.
+Welcome — and thank you for considering a contribution. 
 
-This document covers org-wide expectations. Individual repos may add
+This document covers org-wide polices and Individual repos may have
 project-specific guidance in their own `README.md` or `CONTRIBUTING.md`; where
 they conflict with this document, the repo-level doc takes precedence.
 
@@ -12,10 +10,9 @@ they conflict with this document, the repo-level doc takes precedence.
 
 ## Scope and governance
 
-PowerShellOrg focuses on PowerShell tooling. Before proposing a large feature or
-a significant design change, read [GOVERNANCE.md][governance] to understand how
-decisions get made. For substantial proposals, open an issue first so we can
-align before you invest time writing code.
+I focus mainly on PowerShell tooling. Before proposing a large feature or
+a significant design change, raise an issue so that it can be discussed & 
+importantly agreed upon.
 
 ---
 
@@ -32,124 +29,74 @@ align before you invest time writing code.
 
 ## Development setup
 
-All PowerShellOrg projects use the same build stack:
+Each repo may have a unique development setup, whilst we look in time to standardise this.
 
-| Tool                                 | Purpose                   |
-| ------------------------------------ | ------------------------- |
-| [psake][psake]                       | Build automation          |
-| [PowerShellBuild][powershellbuild]   | Shared psake task library |
-| [Pester 5][pester]                   | Testing                   |
-| [PSScriptAnalyzer][psscriptanalyzer] | Static analysis           |
+**Target platforms:** 
 
-**Install build dependencies:**
+Whilst we could aim to support Windows PowerShell 5.1, as a forward
+thinking developer we now build for and support only the in support versions
+of PowerShell 7.x on Windows, Linux, and macOS. 
 
-You can typically install these with:
+This is inline with PowerShell 7 being likely included in a future version of 
+both the Windows Client & Server Operating Systems.
 
-```powershell
-.\build.ps1 -Task Init -Bootstrap
-```
-
-```powershell
-Install-Module psake             -Scope CurrentUser -Force
-Install-Module PowerShellBuild   -Scope CurrentUser -Force
-Install-Module Pester            -Scope CurrentUser -Force -MinimumVersion '5.0'
-Install-Module PSScriptAnalyzer  -Scope CurrentUser -Force
-```
-
-**Common psake tasks** (every repo exposes these):
-
-```powershell
-Invoke-psake Init      # First-time setup
-Invoke-psake Clean     # Remove build artifacts
-Invoke-psake Build     # Compile / stage the module
-Invoke-psake Test      # Run Pester tests
-Invoke-psake Analyze   # Run PSScriptAnalyzer
-Invoke-psake Publish   # Publish to PSGallery (CI only — never run manually)
-```
-
-Run `Invoke-psake ?` to see all available tasks and their descriptions.
-
-**Target platforms:** Windows PowerShell 5.1 and PowerShell 7.x on Windows,
-Linux, and macOS. Write code that runs on all four combinations.
-
+Support on Linux and MacOS is a best effort basis.
 ---
 
 ## Branching and commits
 
-- **Fork the repo** and work on a branch named for the thing you're changing:
-  `fix/null-ref-in-invoke`, `feat/add-verbose-output`, `docs/update-readme`.
-- **Keep commits focused.** One logical change per commit. Use the [Conventional
-  Commits][conventional-commits] style:
+- **Fork the repo**
+- Start work on a new branch using the following format:
+  `username/issueNumber-briefDescriptionOfIssue`
+  this should look like
+  `kilasuit/9-variableRenames`
+- **Keep commits focused.** One logical change per commit. You may use the [Conventional
+  Commits][conventional-commits] style as below - we don't follow this today:
   - `fix: correct null reference in Invoke-PSDepend`
   - `feat: add -WhatIf support to Install task`
   - `docs: clarify quickstart example`
   - `chore: bump Pester to 5.6`
   - `test: add coverage for empty dependency file`
-- **Do not squash history prematurely.** Maintainers may squash on merge if
-  appropriate.
-- **Keep `main` green.** Never force-push to `main` or shared branches.
-
+- Feel free to locally clean your commits up using rebase & fixup
+- If your branch diverges from the main branch we recommend you rebase from main,
+  as opposed to a merge commit. 
+- Please Sign your commits!
+- **Keep `main` green.**
+- You should not be able to force-push to `main` & you should not do so to any shared branches.
+- However, you own that branch, so you can force push to it - however we recommend using `--force-with-lease` 
 ---
 
 ## Pull request expectations
 
 Before opening a PR:
 
-- [ ] `.\build -Task Test` passes locally on at least one platform
-- [ ] New behavior has Pester test coverage
-- [ ] `CHANGELOG.md` is updated for user-facing changes
-- [ ] Docs are updated if behavior changed
-
-Fill out the PR template completely. PRs with empty templates or no linked issue
+If there is a PR Template
+ - Fill out the PR template completely.  
+PRs with empty templates or no linked issue
 for non-trivial changes will be asked to complete the template before review
-starts.
-
+starts or will be outright rejected.
+ 
 **Draft PRs** are welcome for early feedback. Mark them ready for review when
 you want the full review pass.
 
 ---
 
-## Code review expectations
+## Issue & PR review expectations
 
-### For [contributors](https://github.com/PowerShellOrg/.github/blob/main/.github/GOVERNANCE.md#contributor)
-
-- Respond to review comments within **14 days**. If you need more time, say so —
-  we will wait.
-- If a comment is a question, answer it. If it is a request, either make the
-  change or explain why you disagree.
-- A maintainer will make the final call. Disagreements are discussed, not
-  escalated.
-
-### For [maintainers](https://github.com/PowerShellOrg/.github/blob/main/.github/GOVERNANCE.md#maintainer-per-repository)
-
-| Repo status     | First response SLA                           | Review completion SLA |
-| --------------- | -------------------------------------------- | --------------------- |
-| `status-active` | 7 days                                       | 30 days               |
-| `status-stable` | 30 days                                      | 60 days               |
-| `status-paused` | Suspended; security issues only, best-effort | —                     |
-
-SLAs are best-effort commitments, not guarantees. If a repo is understaffed, the
-project's Steward will note this in the repo's README.
-
-If a PR sits without response past the SLA, open a discussion on the relevant
-repository.
+- I aim to respond to Issues & PR's within **14 days**.
+- If an issue or PR sits without response after this time then please tag me to bring it to my attention.
 
 ---
 
 ## Releases
 
-Releases are cut by maintainers. The process:
+Releases are ad-hoc and as per each repository & downstream platforms.
+However we try and run with the idea that latest code in main 
+is working code that can be classified as "release ready" 
 
-1. Maintainer updates `CHANGELOG.md` and bumps the module version in the
-   manifest.
-2. Maintainer opens a PR titled `chore: release vX.Y.Z`.
-3. PR is reviewed and merged to `main`.
-4. Maintainer pushes a version tag (`vX.Y.Z`) to `main`.
-5. The tag triggers `powershell-release.yml`, which builds, publishes to
-   PSGallery, and creates a GitHub Release.
+Therefore, commits to main/master branches, could be seen as a release.
 
-Contributors do not cut releases. If you believe a release is overdue, open an
-issue and tag the maintainers.
+We are working on adding automation using git tags to properly formalise the releases & release process 
 
 ---
 
@@ -160,19 +107,19 @@ contribution is made under the same license as the project you are contributing
 to (MIT unless the repo states otherwise). You represent that you have the right
 to make the contribution under those terms.
 
-If your employer has rights to code you write, ensure you have permission to
-contribute it before submitting.
+If your employer has rights to code you write, by submitting to these repo's, I make 
+the assumption that you have chosen to do so as part of your own time, and not your employers, 
+or that in doing so even whilst using their time, the act of doing so aids them and their work & is by inclusion 
+of mutual benefit by the submission. 
+This assumption, whether `technically correct or not` protects the code submission. 
+If this is not the case, and we have then merged the code you've submitted we 
+invite your employer to engage with us on this, however we will not step back and remove the submission.
+
+We instead, when approached by a current/previous employer, will update documentation to point out that they have been supportive as a user of the software and via submitted PR's have helped improve the
+open source software that these repos contain.
 
 ---
 
 ## Questions?
 
-See [SUPPORT.md][support].
-
-[governance]: GOVERNANCE.md
-[psake]: https://github.com/psake/psake
-[powershellbuild]: https://github.com/psake/PowerShellBuild
-[pester]: https://pester.dev
-[psscriptanalyzer]: https://github.com/PowerShell/PSScriptAnalyzer
-[conventional-commits]: https://www.conventionalcommits.org/
-[support]: SUPPORT.md
+Raise an issue in the respective repo.
