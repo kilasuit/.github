@@ -1,14 +1,11 @@
 blank_issues_enabled: false
-
 contact_links:
-  - name: Ask a question (GitHub Discussions)
-    url: https://github.com/PowerShellOrg/.github/discussions/new?category=q-a
-    about: Use Discussions for how-to questions. Issues are for bugs and feature requests only.
-
-  - name: Support guide
-    url: https://github.com/PowerShellOrg/.github/blob/main/.github/SUPPORT.md
-    about: Not sure where to go? Read our support guide first.
-
-  - name: Security vulnerability
-    url: https://github.com/PowerShellOrg/.github/blob/main/.github/SECURITY.md
-    about: Report a security issue privately — do NOT open a public issue.
+  - name: Windows PowerShell
+    url: https://support.microsoft.com/windows/send-feedback-to-microsoft-with-the-feedback-hub-app-f59187f8-8739-22d6-ba93-f66612949332
+    about: Windows PowerShell issues or suggestions.
+  - name: Support
+    url: https://github.com/PowerShell/PowerShell/blob/master/.github/SUPPORT.md
+    about: PowerShell Support Questions/Help
+  - name: Documentation Issue
+    url: https://github.com/MicrosoftDocs/PowerShell-Docs/issues/new/choose
+    about: Please open issues on documentation for PowerShell here.
