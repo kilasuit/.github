@@ -1,23 +1,5 @@
 # Security Policy
 
-## Supported versions
-
-By default, PowerShellOrg supports the **latest minor release of the latest
-major version** of each module. Individual repositories may define a broader
-support window in their own `SECURITY.md`; where they do, the repo-level policy
-takes precedence over this document.
-
-| Version policy              | Receives security fixes?                 |
-| --------------------------- | ---------------------------------------- |
-| Latest release              | Yes                                      |
-| Previous minor (same major) | Best-effort; patch may not be backported |
-| Older majors                | No                                       |
-
-If you are unsure whether a version is covered, open a discussion or check the
-repo's own `SECURITY.md`.
-
----
-
 ## Reporting a vulnerability
 
 **Please do not report security vulnerabilities in public GitHub issues.**
@@ -38,17 +20,19 @@ and the Org Admin.
 
 If GitHub Private Vulnerability Reporting is unavailable or you prefer email:
 
-**<privacy@powershell.org>**
+**<security@kilasuit.org>**
 
 ### What to include
 
 A useful report includes:
 
 - A description of the vulnerability and the potential impact
-- The affected module name(s) and version(s)
+- The affected repository
 - Steps to reproduce or a proof-of-concept
 - Any known mitigations or workarounds
 - Your preferred contact method for follow-up
+
+If sending by Email this **must** be encrypted and signed using the PGP Key as listed on https://blog.kilasuit.org/contact-me/
 
 ---
 
@@ -58,19 +42,19 @@ Once we receive your report:
 
 | Milestone                                             | Target   |
 | ----------------------------------------------------- | -------- |
-| Acknowledge receipt                                   | 72 hours |
-| Provide a status update                               | 7 days   |
+| Acknowledge receipt & provide a preliminary status    | 84 hours |
+| Provide a follow up status update                     | 7 days   |
 | Deliver fix or mitigation for **critical** severity   | 14 days  |
 | Deliver fix or mitigation for **high** severity       | 30 days  |
 | Deliver fix or mitigation for **medium/low** severity | 90 days  |
 
-These are targets, not guarantees. If we need more time, we will tell you why.
+These are targets, not guarantees. If I need more time, I'll will tell you why.
 
 ---
 
 ## Coordinated disclosure
 
-We follow a coordinated disclosure model:
+We follow the widely accepted coordinated disclosure model:
 
 1. Reporter submits the vulnerability privately.
 2. Maintainers validate and develop a fix.
@@ -100,8 +84,7 @@ In return, we commit to:
 
 The following are generally not in scope for security reports:
 
-- Vulnerabilities in PowerShell itself, the .NET runtime, or Windows — report
-  those to Microsoft
+- Vulnerabilities in libraries or products that we consume - These should be directed to their own programs.
 - Issues that require the attacker to already have administrative or write
   access to the affected system
 - Denial-of-service attacks that require significant resources from the attacker
@@ -114,8 +97,6 @@ rather review a borderline finding than miss a real one.
 
 ## Questions
 
-General security questions (not vulnerability reports) can be asked in GitHub
-Discussions on the relevant repository.
-
+General security questions (not vulnerability reports) should be asked in issues in their respective repos.
 [private-vulnerability-reporting]:
   https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability
